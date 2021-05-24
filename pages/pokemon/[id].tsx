@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { gql } from 'apollo-server-micro'
 import Layout from 'components/Layout'
 import { IPokemonDetails } from 'apollo/types/pokemonDetails'
@@ -7,6 +7,7 @@ import { initializeApollo } from 'apollo/client'
 import { PokeAPI } from 'apollo/datasources/pokeApi'
 import { context } from 'apollo/context'
 import { GetServerSideProps } from 'next'
+import { IPokemonAbility } from 'apollo/types/pokemonAbility'
 
 const PokemonDetailsQuery = gql`
   query PokemonDetails($id: String) {
@@ -29,9 +30,12 @@ const PokemonDetailsQuery = gql`
   }
 `
 
-export default function Pokemon({ pokemon }) {
-  console.log(pokemon)
-  function printMultipleAbilities(arr) {
+interface PokemonProps {
+  pokemon: IPokemonDetails
+}
+
+export default function Pokemon({ pokemon }: PokemonProps): ReactElement {
+  function printMultipleAbilities(arr: IPokemonAbility[]): string {
     let text = ''
     arr.forEach(({ name }, index) => {
       if (index === arr.length - 1) {
@@ -81,10 +85,8 @@ export default function Pokemon({ pokemon }) {
         </div>
       </div>
       <h2 className='text-2xl mt-6 mb-2'>Types</h2>
-      {pokemon.types.map((type, index) => (
-        <p className='' key={index}>
-          {type}
-        </p>
+      {pokemon.types.map((type) => (
+        <p key={type}>{type}</p>
       ))}
       <p className='mt-10 text-center'>
         <Link href='/'>
@@ -104,7 +106,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const apolloClient = initializeApollo(null, { dataSources: { pokeAPI } })
 
   interface PokemonDetailsQueryResult {
-    pokemonDetails: IPokemonDetails[]
+    pokemonDetails: IPokemonDetails
   }
 
   interface PokemonDetailsQueryVariables {

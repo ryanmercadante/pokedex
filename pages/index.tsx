@@ -31,6 +31,14 @@ export enum SortOption {
   Ztoa,
 }
 
+interface GetPokemonQueryResult {
+  pokemon: IPokemon[]
+}
+
+interface GetPokemonQueryVariables {
+  type?: string
+}
+
 export default function Home({
   pokemon: pokemonFromProps,
 }: {
@@ -42,68 +50,69 @@ export default function Home({
     type: '',
   })
   const [sortOption, setSortOption] = useState<SortOption>(SortOption.Lowest)
-  const [getPokemonByType, { data }] = useLazyQuery(PokemonQuery)
+  // const [getPokemonByType, { data }] =
+  //   useLazyQuery<GetPokemonQueryResult, GetPokemonQueryVariables>(PokemonQuery)
 
-  useEffect(() => {
-    if (data) {
-      const filteredPokemon = data?.pokemon.filter((poke) => {
-        return poke.name.includes(filterOptions.text)
-      })
-      setPokemon(filteredPokemon)
-    }
-  }, [data, filterOptions.text])
+  // useEffect(() => {
+  //   if (data) {
+  //     const filteredPokemon = data?.pokemon.filter((poke) => {
+  //       return poke.name.includes(filterOptions.text)
+  //     })
+  //     setPokemon(filteredPokemon)
+  //   }
+  // }, [data])
 
-  useEffect(() => {
-    if (filterOptions.type) {
-      if (filterOptions.type === 'All') {
-        setPokemon(pokemonFromProps)
-      } else {
-        console.log(filterOptions)
-        getPokemonByType({
-          variables: {
-            type: filterOptions.type === 'All' ? null : filterOptions.type,
-          },
-        })
-      }
-    }
-  }, [filterOptions, getPokemonByType, pokemonFromProps])
+  // useEffect(() => {
+  //   if (filterOptions.type) {
+  //     if (filterOptions.type === 'All') {
+  //       setPokemon(pokemonFromProps)
+  //     } else {
+  //       console.log(filterOptions)
+  //       getPokemonByType({
+  //         variables: {
+  //           type: filterOptions.type === 'All' ? null : filterOptions.type,
+  //         },
+  //       })
+  //     }
+  //   }
+  // }, [filterOptions.type])
 
-  useEffect(() => {
-    let sortedPokemon: IPokemon[]
+  // useEffect(() => {
+  //   let sortedPokemon: IPokemon[]
 
-    switch (sortOption) {
-      case SortOption.Highest:
-        sortedPokemon = [...pokemon].sort((a, b) => {
-          if (a.pokeIndex > b.pokeIndex) return -1
-          if (a.pokeIndex < b.pokeIndex) return 1
-          return 0
-        })
-        break
-      case SortOption.Atoz:
-        sortedPokemon = [...pokemon].sort((a, b) => {
-          if (a.name < b.name) return -1
-          if (a.name > b.name) return 1
-          return 0
-        })
-        break
-      case SortOption.Ztoa:
-        sortedPokemon = [...pokemon].sort((a, b) => {
-          if (a.name > b.name) return -1
-          if (a.name < b.name) return 1
-          return 0
-        })
-        break
-      default:
-        sortedPokemon = [...pokemon].sort((a, b) => {
-          if (a.pokeIndex < b.pokeIndex) return -1
-          if (a.pokeIndex > b.pokeIndex) return 1
-          return 0
-        })
-        break
-    }
+  //   switch (sortOption) {
+  //     case SortOption.Highest:
+  //       sortedPokemon = [...pokemon].sort((a, b) => {
+  //         if (a.pokeIndex > b.pokeIndex) return -1
+  //         if (a.pokeIndex < b.pokeIndex) return 1
+  //         return 0
+  //       })
+  //       break
+  //     case SortOption.Atoz:
+  //       sortedPokemon = [...pokemon].sort((a, b) => {
+  //         if (a.name < b.name) return -1
+  //         if (a.name > b.name) return 1
+  //         return 0
+  //       })
+  //       break
+  //     case SortOption.Ztoa:
+  //       sortedPokemon = [...pokemon].sort((a, b) => {
+  //         if (a.name > b.name) return -1
+  //         if (a.name < b.name) return 1
+  //         return 0
+  //       })
+  //       break
+  //     default:
+  //       sortedPokemon = [...pokemon].sort((a, b) => {
+  //         if (a.pokeIndex < b.pokeIndex) return -1
+  //         if (a.pokeIndex > b.pokeIndex) return 1
+  //         return 0
+  //       })
+  //       break
+  //   }
 
-    setPokemon(sortedPokemon)
-  }, [pokemon, sortOption])
+  //   setPokemon(sortedPokemon)
+  // }, [pokemon, sortOption])
 
   function handleFormSubmit(e: React.SyntheticEvent): void {
     e.preventDefault()

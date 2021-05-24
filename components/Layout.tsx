@@ -1,7 +1,12 @@
 import Head from 'next/head'
-import React from 'react'
+import React, { ReactElement, ReactNode } from 'react'
 
-export default function Layout({ title, children }) {
+interface LayoutProps {
+  title: string
+  children: ReactNode
+}
+
+export default function Layout({ title, children }: LayoutProps): ReactElement {
   return (
     <div className='bg-gray-300'>
       <Head>
