@@ -1,0 +1,5 @@
+export { Query } from './query'
+export { Pokemon } from './pokemon'
+export { PokemonDetails } from './pokemonDetails'
+export { PokemonAbility } from './pokemonAbility'
+export { PokemonStat } from './pokemonStat'
