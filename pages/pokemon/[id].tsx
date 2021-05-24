@@ -50,44 +50,51 @@ export default function Pokemon({ pokemon }: PokemonProps): ReactElement {
   return (
     <Layout title={pokemon.name}>
       <h1 className='text-4xl mb-2 text-center capitalize'>{pokemon.name}</h1>
-      <div className='bg-gray-700 my-8 p-4 rounded-md'>
-        <div className='flex justify-start mb-4'>
+      <div className='bg-gray-700 my-8 p-2 rounded-md mx-4'>
+        <div className='flex justify-start mb-4 flex-col md:flex-row md:flex-wrap'>
           <img
-            className='w-64 h-64 mr-4 bg-gray-200 rounded-md'
+            className='max-h-full max-w-full m-1 bg-gray-200 rounded-md md:w-64 md:h-64'
             src={pokemon.imageUrl}
             alt={pokemon.name}
           />
-          <ul className='bg-red-500 flex-grow p-4 rounded-md'>
-            {pokemon.stats.map(({ name, baseStat }) => {
-              return (
-                <li key={name} className='flex'>
-                  <strong className='mr-10 mb-3'>{name}</strong>
-                  <p>{baseStat}</p>
-                </li>
-              )
-            })}
-          </ul>
-        </div>
-        <div className='bg-blue-400 p-4 w-64 flex flex-row flex-wrap justify-between rounded-md'>
-          <div className='mb-4 mr-10'>
-            <p className='mr-2 text-white font-semibold'>Height</p>
-            <p>{(+pokemon.height * 0.1).toPrecision(2)} m</p>
+          <div className='bg-red-500 flex-grow p-4 rounded-md m-1'>
+            <ul>
+              {pokemon.stats.map(({ name, baseStat }) => {
+                return (
+                  <li key={name} className='flex'>
+                    <strong className='mr-10 mb-3 text-white font-semibold capitalize'>
+                      {name}
+                    </strong>
+                    <p>{baseStat}</p>
+                  </li>
+                )
+              })}
+            </ul>
           </div>
-          <div className='mr-10'>
-            <p className='mr-2 text-white font-semibold'>Weight</p>
-            <p>{(+pokemon.weight * 0.1).toPrecision(2)} kg</p>
+          <div className='bg-blue-400 p-4 flex flex-row flex-wrap justify-between rounded-md max-w-full max-h-full m-1 md:w-64'>
+            <div className='mb-4 mr-10'>
+              <p className='mr-2 text-white font-semibold'>Height</p>
+              <p>{(+pokemon.height * 0.1).toPrecision(2)} m</p>
+            </div>
+            <div className='mr-10'>
+              <p className='mr-2 text-white font-semibold'>Weight</p>
+              <p>{(+pokemon.weight * 0.1).toPrecision(2)} kg</p>
+            </div>
+            <div className='mr-10'>
+              <p className='mr-2 text-white font-semibold'>Abilities</p>
+              <p>{printMultipleAbilities(pokemon.abilities)}</p>
+            </div>
           </div>
-          <div className='mr-10'>
-            <p className='mr-2 text-white font-semibold'>Abilities</p>
-            {/* <p>{pokemon.abilities.map((ability) => ability.name)}</p> */}
-            <p>{printMultipleAbilities(pokemon.abilities)}</p>
+          <div className='bg-gray-200 p-4 m-1 rounded-md'>
+            <h2 className='text-lg'>Type(s)</h2>
+            {pokemon.types.map((type) => (
+              <p className='capitalize' key={type}>
+                {type}
+              </p>
+            ))}
           </div>
         </div>
       </div>
-      <h2 className='text-2xl mt-6 mb-2'>Types</h2>
-      {pokemon.types.map((type) => (
-        <p key={type}>{type}</p>
-      ))}
       <p className='mt-10 text-center'>
         <Link href='/'>
           <a className='text-2xl underline'>Home</a>
