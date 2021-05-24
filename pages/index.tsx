@@ -19,16 +19,17 @@ const PokemonQuery = gql`
   }
 `
 
-export interface FilterOptions {
-  text: string
-  type: string
-}
-
 export enum SortOption {
   Lowest,
   Highest,
   Atoz,
   Ztoa,
+}
+
+export interface FilterOptions {
+  text: string
+  type: string
+  sort: SortOption
 }
 
 interface GetPokemonQueryResult {
@@ -47,79 +48,83 @@ export default function Home({
   const [pokemon, setPokemon] = useState<IPokemon[]>(pokemonFromProps)
   const [filterOptions, setFilterOptions] = useState<FilterOptions>({
     text: '',
-    type: '',
+    type: 'All',
+    sort: SortOption.Lowest,
   })
-  const [sortOption, setSortOption] = useState<SortOption>(SortOption.Lowest)
-  // const [getPokemonByType, { data }] =
-  //   useLazyQuery<GetPokemonQueryResult, GetPokemonQueryVariables>(PokemonQuery)
+  const [getPokemonByType, { data }] = useLazyQuery<
+    GetPokemonQueryResult,
+    GetPokemonQueryVariables
+  >(PokemonQuery, {
+    onCompleted: ({ pokemon }) => {
+      const _pokemon = sortAndFilter(pokemon)
+      setPokemon(_pokemon)
+    },
+  })
 
-  // useEffect(() => {
-  //   if (data) {
-  //     const filteredPokemon = data?.pokemon.filter((poke) => {
-  //       return poke.name.includes(filterOptions.text)
-  //     })
-  //     setPokemon(filteredPokemon)
-  //   }
-  // }, [data])
+  function sortAndFilter(pokemon): IPokemon[] {
+    let _pokemon = sortPokemon(filterOptions.sort, pokemon)
 
-  // useEffect(() => {
-  //   if (filterOptions.type) {
-  //     if (filterOptions.type === 'All') {
-  //       setPokemon(pokemonFromProps)
-  //     } else {
-  //       console.log(filterOptions)
-  //       getPokemonByType({
-  //         variables: {
-  //           type: filterOptions.type === 'All' ? null : filterOptions.type,
-  //         },
-  //       })
-  //     }
-  //   }
-  // }, [filterOptions.type])
+    if (filterOptions.text) {
+      _pokemon = _pokemon.filter((poke) =>
+        poke.name.includes(filterOptions.text),
+      )
+    }
 
-  // useEffect(() => {
-  //   let sortedPokemon: IPokemon[]
+    return _pokemon
+  }
 
-  //   switch (sortOption) {
-  //     case SortOption.Highest:
-  //       sortedPokemon = [...pokemon].sort((a, b) => {
-  //         if (a.pokeIndex > b.pokeIndex) return -1
-  //         if (a.pokeIndex < b.pokeIndex) return 1
-  //         return 0
-  //       })
-  //       break
-  //     case SortOption.Atoz:
-  //       sortedPokemon = [...pokemon].sort((a, b) => {
-  //         if (a.name < b.name) return -1
-  //         if (a.name > b.name) return 1
-  //         return 0
-  //       })
-  //       break
-  //     case SortOption.Ztoa:
-  //       sortedPokemon = [...pokemon].sort((a, b) => {
-  //         if (a.name > b.name) return -1
-  //         if (a.name < b.name) return 1
-  //         return 0
-  //       })
-  //       break
-  //     default:
-  //       sortedPokemon = [...pokemon].sort((a, b) => {
-  //         if (a.pokeIndex < b.pokeIndex) return -1
-  //         if (a.pokeIndex > b.pokeIndex) return 1
-  //         return 0
-  //       })
-  //       break
-  //   }
+  useEffect(() => {
+    const pmon = sortAndFilter(data?.pokemon || pokemon)
+    setPokemon(pmon)
+  }, [filterOptions.sort, filterOptions.text])
 
-  //   setPokemon(sortedPokemon)
-  // }, [pokemon, sortOption])
+  function sortPokemon(
+    sortOption: SortOption,
+    _pokemon: IPokemon[],
+  ): IPokemon[] {
+    let sortedPokemon: IPokemon[]
+
+    switch (sortOption) {
+      case SortOption.Highest:
+        sortedPokemon = [..._pokemon].sort((a, b) => {
+          if (a.pokeIndex > b.pokeIndex) return -1
+          if (a.pokeIndex < b.pokeIndex) return 1
+          return 0
+        })
+        break
+      case SortOption.Atoz:
+        sortedPokemon = [..._pokemon].sort((a, b) => {
+          if (a.name < b.name) return -1
+          if (a.name > b.name) return 1
+          return 0
+        })
+        break
+      case SortOption.Ztoa:
+        sortedPokemon = [..._pokemon].sort((a, b) => {
+          if (a.name > b.name) return -1
+          if (a.name < b.name) return 1
+          return 0
+        })
+        break
+      default:
+        sortedPokemon = [..._pokemon].sort((a, b) => {
+          if (a.pokeIndex < b.pokeIndex) return -1
+          if (a.pokeIndex > b.pokeIndex) return 1
+          return 0
+        })
+        break
+    }
+
+    return sortedPokemon
+  }
 
   function handleFormSubmit(e: React.SyntheticEvent): void {
     e.preventDefault()
-    const filteredPokemon = pokemon.filter((poke) =>
-      poke.name.includes(filterOptions.text),
-    )
-    setPokemon(filteredPokemon)
+    getPokemonByType({
+      variables: {
+        type: filterOptions.type === 'All' ? null : filterOptions.type,
+      },
+    })
   }
 
   return (
@@ -129,7 +134,6 @@ export default function Home({
         handleFormSubmit={handleFormSubmit}
         filterOptions={filterOptions}
         setFilterOptions={setFilterOptions}
-        setSortOption={setSortOption}
       />
       <PokemonCardList pokemon={pokemon} />
     </Layout>
