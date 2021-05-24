@@ -74,7 +74,7 @@ export default function Home({
   }
 
   useEffect(() => {
-    const pmon = sortAndFilter(data?.pokemon || pokemon)
+    const pmon = sortAndFilter(data?.pokemon || pokemonFromProps)
     setPokemon(pmon)
   }, [filterOptions.sort, filterOptions.text])
 
