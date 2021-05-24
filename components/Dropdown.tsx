@@ -24,7 +24,7 @@ export default function Dropdown({
   }, [selected])
 
   return (
-    <div className='lg:w-48 sm:my-1 md:flex-grow sm:flex-grow'>
+    <div className='lg:w-48 sm:my-1 md:flex-grow sm:flex-grow cursor-pointer'>
       <Listbox value={selected} onChange={setSelected}>
         <div className='relative'>
           <Listbox.Button

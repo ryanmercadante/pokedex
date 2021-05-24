@@ -7,6 +7,7 @@ import Search from '../components/Search'
 import { initializeApollo } from '../apollo/client'
 import { PokeAPI } from 'apollo/datasources/pokeApi'
 import { IPokemon } from 'apollo/types/pokemon'
+import PokemonCountBadge from 'components/PokemonCountBadge'
 
 const PokemonQuery = gql`
   query Pokemon($type: String) {
@@ -129,12 +130,12 @@ export default function Home({
 
   return (
     <Layout title='Pokedex'>
-      <h1 className='text-4xl mb-8 text-center'>NextJS Pokedex</h1>
       <Search
         handleFormSubmit={handleFormSubmit}
         filterOptions={filterOptions}
         setFilterOptions={setFilterOptions}
       />
+      <PokemonCountBadge count={pokemon.length} />
       <PokemonCardList pokemon={pokemon} />
     </Layout>
   )

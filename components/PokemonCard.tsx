@@ -10,9 +10,9 @@ export default function PokemonCard({
   pokemon,
 }: PokemonCardProps): ReactElement {
   return (
-    <li className='w-60 mx-2'>
+    <li className='w-60 mx-2 hover:transform hover:-translate-y-2 duration-150 ease-in-out'>
       <Link href={`/pokemon/${pokemon.pokeIndex}`}>
-        <a className='border p-4 border-gray my-2 capitalize flex items-center text-lg bg-gray-200 rounded-md flex-col'>
+        <a className='border p-4 border-gray my-2 capitalize flex items-center text-lg bg-gray-200 rounded-md flex-col shadow-md'>
           <img
             className='w-20 h-20 mr-3'
             src={pokemon.imageUrl}
