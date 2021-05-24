@@ -5,7 +5,7 @@ import Layout from '../components/Layout'
 import PokemonCardList from '../components/PokemonCardList'
 import Search from '../components/Search'
 import { initializeApollo } from '../apollo/client'
-import { PokeAPI } from '../apollo/datasources/pokeApi'
+import { PokeAPI } from 'apollo/datasources/pokeApi'
 import { IPokemon } from 'apollo/types/pokemon'
 
 const PokemonQuery = gql`
