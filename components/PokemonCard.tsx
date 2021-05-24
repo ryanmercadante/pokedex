@@ -1,6 +1,14 @@
+import { ReactElement } from 'react'
+import { IPokemon } from 'apollo/types/pokemon'
 import Link from 'next/link'
 
-export default function PokemonCard({ pokemon }) {
+interface PokemonCardProps {
+  pokemon: IPokemon
+}
+
+export default function PokemonCard({
+  pokemon,
+}: PokemonCardProps): ReactElement {
   return (
     <li className='w-60 mx-2'>
       <Link href={`/pokemon/${pokemon.pokeIndex}`}>

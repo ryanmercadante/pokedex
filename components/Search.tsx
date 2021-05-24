@@ -37,15 +37,13 @@ interface SearchProps {
   handleFormSubmit(e: React.SyntheticEvent): void
   filterOptions: FilterOptions
   setFilterOptions: React.Dispatch<React.SetStateAction<FilterOptions>>
-  // setSortOption: React.Dispatch<React.SetStateAction<SortOption>>
 }
 
 export default function Search({
   handleFormSubmit,
   filterOptions,
   setFilterOptions,
-}: // setSortOption,
-SearchProps): ReactElement {
+}: SearchProps): ReactElement {
   const sortOptions: IDropdownSortOption[] = [
     { name: 'Lowest Number (First)', type: SortOption.Lowest },
     { name: 'Highest Number (First)', type: SortOption.Highest },
