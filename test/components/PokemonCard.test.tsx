@@ -2,7 +2,6 @@ import { render, fireEvent, act } from '../test-utils'
 import { IPokemon } from '../../apollo/types/pokemon'
 import PokemonCard from '../../components/PokemonCard'
 import { waitFor } from '@testing-library/dom'
-const useRouter = jest.spyOn(require('next/router'), 'useRouter')
 
 const pokemon: IPokemon = {
   name: 'bulbasaur',
@@ -21,6 +20,7 @@ describe('PokemonCard Component', () => {
 
   it('should redirect when clicking on card', async () => {
     // mock router push with jest
+    const useRouter = jest.spyOn(require('next/router'), 'useRouter')
     const router = { push: jest.fn(), prefetch: jest.fn() }
     useRouter.mockReturnValue(router)
 
