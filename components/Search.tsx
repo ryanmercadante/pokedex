@@ -100,7 +100,7 @@ export default function Search({
               onChange={(e) =>
                 setFilterOptions({ ...filterOptions, text: e.target.value })
               }
-              placeholder='Pika'
+              placeholder='Pikachu'
             />
           </div>
         </div>

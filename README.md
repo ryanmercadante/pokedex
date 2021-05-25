@@ -7,6 +7,7 @@
 - [Setup](#setup)
 - [Features](#features)
 - [Inspiration](#inspiration)
+- [Contact](#contact)
 
 ## General Info
 
@@ -57,3 +58,10 @@ $ npm run dev
 ## Inspiration
 
 The basic styling was inspired and choice of Next.js was inspired by this [video](https://www.youtube.com/watch?v=LMRAEUPkFXI). I then expanded on this idea by creating a GraphQL service layer on top of the [Pokemon REST API](https://pokeapi.co/docs/v2), adding searching, sorting, and filtering.
+
+## Contact
+
+- [LinkedIn](https://www.linkedin.com/in/ryan-mercadante-11a035152/)
+- [Github](https://www.github.com/ryanmercadante)
+- [Twitter](https://twitter.com/RyanMercadante)
+- [Email](mailto:ryan.a.mercadante@gmail.com)
