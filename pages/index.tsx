@@ -162,14 +162,20 @@ export const getStaticProps: GetStaticProps = async (context) => {
     pokemon: IPokemon[]
   }
 
-  const { data } = await apolloClient.query<PokemonQueryResult, null>({
-    query: PokemonQuery,
-  })
+  try {
+    const { data } = await apolloClient.query<PokemonQueryResult, null>({
+      query: PokemonQuery,
+    })
 
-  return {
-    props: {
-      initialApolloState: apolloClient.cache.extract(),
-      pokemon: data.pokemon,
-    },
+    return {
+      props: {
+        initialApolloState: apolloClient.cache.extract(),
+        pokemon: data.pokemon,
+      },
+    }
+  } catch (err) {
+    return {
+      props: { pokemon: [] },
+    }
   }
 }

@@ -48,18 +48,18 @@ export default function Pokemon({ pokemon }: PokemonProps): ReactElement {
   }
 
   return (
-    <Layout title={pokemon.name}>
-      <h1 className='text-4xl mb-2 text-center capitalize'>{pokemon.name}</h1>
+    <Layout title={pokemon?.name}>
+      <h1 className='text-4xl mb-2 text-center capitalize'>{pokemon?.name}</h1>
       <div className='bg-gray-700 my-8 p-2 rounded-md mx-4'>
         <div className='flex justify-start mb-4 flex-col md:flex-row md:flex-wrap'>
           <img
             className='max-h-full max-w-full m-1 bg-gray-200 rounded-md md:w-64 md:h-64'
-            src={pokemon.imageUrl}
-            alt={pokemon.name}
+            src={pokemon?.imageUrl}
+            alt={pokemon?.name}
           />
           <div className='bg-red-500 flex-grow p-4 rounded-md m-1'>
             <ul>
-              {pokemon.stats.map(({ name, baseStat }) => {
+              {pokemon?.stats.map(({ name, baseStat }) => {
                 return (
                   <li key={name} className='flex'>
                     <strong className='mr-10 mb-3 text-white font-semibold capitalize'>
@@ -74,22 +74,22 @@ export default function Pokemon({ pokemon }: PokemonProps): ReactElement {
           <div className='bg-blue-400 p-4 flex flex-row flex-wrap justify-between rounded-md max-w-full max-h-full m-1 md:w-64'>
             <div className='mb-4 mr-10'>
               <p className='mr-2 text-white font-semibold'>Height</p>
-              <p>{(+pokemon.height * 0.1).toPrecision(2)} m</p>
+              <p>{(+pokemon?.height * 0.1).toPrecision(2)} m</p>
             </div>
             <div className='mr-10'>
               <p className='mr-2 text-white font-semibold'>Weight</p>
-              <p>{(+pokemon.weight * 0.1).toPrecision(2)} kg</p>
+              <p>{(+pokemon?.weight * 0.1).toPrecision(2)} kg</p>
             </div>
             <div className='mr-10'>
               <p className='mr-2 text-white font-semibold'>Abilities</p>
-              <p>{printMultipleAbilities(pokemon.abilities)}</p>
+              <p>{printMultipleAbilities(pokemon?.abilities)}</p>
             </div>
           </div>
           <div className='bg-gray-200 p-4 m-1 rounded-md'>
             <h2 className='text-lg underline'>
-              Type{pokemon.types.length > 1 ? 's' : ''}
+              Type{pokemon?.types.length > 1 ? 's' : ''}
             </h2>
-            {pokemon.types.map((type) => (
+            {pokemon?.types.map((type) => (
               <p className='capitalize' key={type}>
                 {type}
               </p>
@@ -122,17 +122,25 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     id: string
   }
 
-  const { data } = await apolloClient.query<
-    PokemonDetailsQueryResult,
-    PokemonDetailsQueryVariables
-  >({
-    query: PokemonDetailsQuery,
-    variables: { id: id as string },
-  })
+  try {
+    const { data } = await apolloClient.query<
+      PokemonDetailsQueryResult,
+      PokemonDetailsQueryVariables
+    >({
+      query: PokemonDetailsQuery,
+      variables: { id: id as string },
+    })
 
-  return {
-    props: {
-      pokemon: data.pokemonDetails,
-    },
+    return {
+      props: {
+        pokemon: data.pokemonDetails,
+      },
+    }
+  } catch (err) {
+    return {
+      props: {
+        pokemon: {},
+      },
+    }
   }
 }
