@@ -86,7 +86,9 @@ export default function Pokemon({ pokemon }: PokemonProps): ReactElement {
             </div>
           </div>
           <div className='bg-gray-200 p-4 m-1 rounded-md'>
-            <h2 className='text-lg'>Type(s)</h2>
+            <h2 className='text-lg underline'>
+              Type{pokemon.types.length > 1 ? 's' : ''}
+            </h2>
             {pokemon.types.map((type) => (
               <p className='capitalize' key={type}>
                 {type}

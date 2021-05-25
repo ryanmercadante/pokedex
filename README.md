@@ -54,6 +54,7 @@ $ npm run dev
 - Add chart and animation for pokemon stats
 - Enhance pokemon details page
 - More test coverage
+- Add custom favicon
 
 ## Inspiration
 

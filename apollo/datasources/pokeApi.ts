@@ -37,10 +37,7 @@ export class PokeAPI extends RESTDataSource {
     try {
       const [pokemonDetails] = await Promise.all([
         await this.get(`pokemon/${id}`),
-        // await this.get(`evolution-chain/${id}`),
       ])
-      // console.log('pokemonDetails', pokemonDetails)
-      // console.log('evolutionDetails', evolutionDetails)
 
       // Transform abilities into simpler structure
       const pokemonAbilities = pokemonDetails.abilities.map(
@@ -99,10 +96,14 @@ export class PokeAPI extends RESTDataSource {
   }
 
   private handleFind(data): IPokemon[] {
-    return data?.results?.map((result) => this.transformData(result))
+    return data?.results
+      ?.map((result) => this.transformData(result))
+      .filter((pokemon) => pokemon.pokeIndex <= 898) // filter out any pokemon after #898
   }
 
   private handleFindByType(data): IPokemon[] {
-    return data?.pokemon?.map(({ pokemon }) => this.transformData(pokemon))
+    return data?.pokemon
+      ?.map(({ pokemon }) => this.transformData(pokemon))
+      .filter((pokemon) => pokemon.pokeIndex <= 898) // filter out any pokemon after #898
   }
 }
