@@ -1,5 +1,5 @@
 import { objectType, arg, nonNull, nullable } from 'nexus'
-import { Context } from 'apollo/context'
+import { Context } from '../context'
 import { IPokemon } from './pokemon'
 import { IPokemonDetails } from './pokemonDetails'
 

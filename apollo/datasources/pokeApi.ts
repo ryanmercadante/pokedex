@@ -1,7 +1,7 @@
 import { RESTDataSource } from 'apollo-datasource-rest'
 import { DataSource } from 'apollo-datasource'
-import { IPokemon } from 'apollo/types/pokemon'
-import { IPokemonDetails } from 'apollo/types/pokemonDetails'
+import { IPokemon } from '../types/pokemon'
+import { IPokemonDetails } from '../types/pokemonDetails'
 
 export interface IPokeAPI extends DataSource {
   /**
