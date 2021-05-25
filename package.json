@@ -6,39 +6,45 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint . --ext .ts,.tsx,.js.jsx"
+    "lint": "eslint . --ext .ts,.tsx,.js.jsx",
+    "test": "jest"
   },
   "dependencies": {
     "@apollo/client": "^3.3.19",
     "@headlessui/react": "^1.2.0",
     "@heroicons/react": "^1.0.1",
-    "@material-ui/core": "^4.11.4",
     "apollo-datasource-rest": "^0.13.0",
     "apollo-server-caching": "^0.7.0",
     "apollo-server-micro": "^2.24.1",
     "graphql": "^15.5.0",
-    "graphql-tools": "^4.0.8",
     "next": "^10.2.0",
     "nexus": "^1.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
+    "@testing-library/dom": "^7.31.0",
+    "@testing-library/jest-dom": "^5.12.0",
+    "@testing-library/react": "^11.2.7",
     "@types/node": "^15.3.1",
     "@types/react": "^17.0.6",
     "@typescript-eslint/eslint-plugin": "^4.24.0",
     "@typescript-eslint/parser": "^4.24.0",
     "autoprefixer": "^10.2.5",
+    "babel-jest": "^26.6.3",
     "eslint": "^7.27.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.23.2",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "jest": "^26.6.3",
+    "jest-dom": "^4.0.0",
     "postcss": "^8.2.15",
     "postcss-preset-env": "^6.7.0",
     "prettier": "^2.3.0",
     "tailwindcss": "^2.1.2",
+    "ts-node": "^10.0.0",
     "typescript": "^4.2.4"
   }
 }

@@ -1,13 +1,13 @@
+import { GetServerSideProps } from 'next'
 import Link from 'next/link'
 import React, { ReactElement } from 'react'
 import { gql } from 'apollo-server-micro'
-import Layout from 'components/Layout'
-import { IPokemonDetails } from 'apollo/types/pokemonDetails'
-import { initializeApollo } from 'apollo/client'
-import { PokeAPI } from 'apollo/datasources/pokeApi'
-import { context } from 'apollo/context'
-import { GetServerSideProps } from 'next'
-import { IPokemonAbility } from 'apollo/types/pokemonAbility'
+import Layout from '../../components/Layout'
+import { IPokemonDetails } from '../../apollo/types/pokemonDetails'
+import { initializeApollo } from '../../apollo/client'
+import { PokeAPI } from '../../apollo/datasources/pokeApi'
+import { context } from '../../apollo/context'
+import { IPokemonAbility } from '../../apollo/types/pokemonAbility'
 
 const PokemonDetailsQuery = gql`
   query PokemonDetails($id: String) {

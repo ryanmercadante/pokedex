@@ -1,5 +1,5 @@
-import { FilterOptions, SortOption } from 'pages'
 import { ReactElement } from 'react'
+import { FilterOptions, SortOption } from '../pages'
 import Dropdown from './Dropdown'
 
 export interface IPokemonTypeOption {
@@ -64,6 +64,7 @@ export default function Search({
             </label>
             <Dropdown
               name='typeDropdown'
+              testId='TypeDropdown'
               options={pokemonTypeOptions}
               onOptionSelect={(option: IPokemonTypeOption) => {
                 setFilterOptions({ ...filterOptions, type: option.name })
@@ -76,6 +77,7 @@ export default function Search({
             </label>
             <Dropdown
               name='sortDropdown'
+              testId='SortDropdown'
               options={sortOptions}
               onOptionSelect={(option: IDropdownSortOption) => {
                 setFilterOptions({ ...filterOptions, sort: option.type })
@@ -91,6 +93,7 @@ export default function Search({
             </label>
             <input
               name='searchInput'
+              data-testid='SearchInput'
               className='p-2 h-9 shadow-md rounded-lg lg:w-48 md:w-36 min-w-full'
               type='text'
               value={filterOptions.text}
@@ -103,7 +106,7 @@ export default function Search({
         </div>
         <button
           type='submit'
-          className='bg-blue-400 px-2 mx-2 rounded-lg text-white h-9 lg:mt-8 md:mt-2 mt-4'
+          className='bg-blue-400 px-2 mx-2 rounded-lg text-white h-9 lg:mt-8 md:mt-2 mt-4 shadow-md'
         >
           Search
         </button>

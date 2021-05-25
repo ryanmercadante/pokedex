@@ -1,6 +1,6 @@
 import { ReactElement } from 'react'
-import { IPokemon } from 'apollo/types/pokemon'
 import Link from 'next/link'
+import { IPokemon } from '../apollo/types/pokemon'
 
 interface PokemonCardProps {
   pokemon: IPokemon
@@ -18,7 +18,7 @@ export default function PokemonCard({
             src={pokemon.imageUrl}
             alt={pokemon.name}
           />
-          <div>
+          <div data-testid='PokemonName'>
             <span className='mr-2 font-bold'>{pokemon.pokeIndex}.</span>
             {pokemon.name}
           </div>

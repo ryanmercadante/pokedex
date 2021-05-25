@@ -8,12 +8,14 @@ type DropdownOption = IDropdownSortOption | IPokemonTypeOption
 
 interface DropdownProps {
   name: string
+  testId: string
   options: DropdownOptions
   onOptionSelect(option: DropdownOption): void
 }
 
 export default function Dropdown({
   name,
+  testId,
   options,
   onOptionSelect,
 }: DropdownProps): ReactElement {
@@ -25,7 +27,7 @@ export default function Dropdown({
 
   return (
     <div className='lg:w-48 sm:my-1 md:flex-grow sm:flex-grow cursor-pointer'>
-      <Listbox value={selected} onChange={setSelected}>
+      <Listbox value={selected} onChange={setSelected} data-testid={testId}>
         <div className='relative'>
           <Listbox.Button
             name={name}
