@@ -1,6 +1,7 @@
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent, act } from '../test-utils'
 import { IPokemon } from '../../apollo/types/pokemon'
 import PokemonCard from '../../components/PokemonCard'
+import { waitFor } from '@testing-library/dom'
 const useRouter = jest.spyOn(require('next/router'), 'useRouter')
 
 const pokemon: IPokemon = {
@@ -27,14 +28,18 @@ describe('PokemonCard Component', () => {
 
     // click next Link component
     const bulbasaur = getByText('bulbasaur')
-    fireEvent.click(bulbasaur.firstChild)
+    act(() => {
+      fireEvent.click(bulbasaur.firstChild)
+    })
 
-    // expect router.push to have been called with the correct route
-    expect(router.push).toHaveBeenCalledTimes(1)
-    expect(router.push).toHaveBeenCalledWith(
-      '/pokemon/1',
-      '/pokemon/1',
-      expect.anything(),
-    )
+    await waitFor(() => {
+      // expect router.push to have been called with the correct route
+      expect(router.push).toHaveBeenCalledTimes(1)
+      expect(router.push).toHaveBeenCalledWith(
+        '/pokemon/1',
+        '/pokemon/1',
+        expect.anything(),
+      )
+    })
   })
 })

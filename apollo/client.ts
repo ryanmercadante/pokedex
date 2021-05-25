@@ -2,6 +2,7 @@ import { IncomingMessage, ServerResponse } from 'http'
 import { useMemo } from 'react'
 import {
   ApolloClient,
+  ApolloLink,
   InMemoryCache,
   NormalizedCacheObject,
 } from '@apollo/client'
@@ -19,7 +20,7 @@ export type ResolverContext = {
   dataSources?: DataSources
 }
 
-function createIsomorphicLink(context: ResolverContext = {}) {
+function createIsomorphicLink(context: ResolverContext = {}): ApolloLink {
   if (typeof window === 'undefined') {
     // server
     const { SchemaLink } = require('@apollo/client/link/schema')
@@ -30,12 +31,13 @@ function createIsomorphicLink(context: ResolverContext = {}) {
     const { HttpLink } = require('@apollo/client/link/http')
     return new HttpLink({
       uri: '/api/graphql',
-      // credentials: 'same-origin'
     })
   }
 }
 
-function createApolloClient(context?: ResolverContext) {
+function createApolloClient(
+  context?: ResolverContext,
+): ApolloClient<NormalizedCacheObject> {
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
     link: createIsomorphicLink(context),
@@ -48,7 +50,7 @@ export function initializeApollo(
   // Pages with Next.js data fetching methods, like `getStaticProps`, can send
   // a custom context which will be used by `SchemaLink` to server render pages
   context?: ResolverContext,
-) {
+): ApolloClient<NormalizedCacheObject> {
   const _apolloClient = apolloClient ?? createApolloClient(context)
 
   // If your page has Next.js data fetching methods that use Apollo Client, the initial state
@@ -66,7 +68,9 @@ export function initializeApollo(
   return _apolloClient
 }
 
-export function useApollo(initialState) {
+export function useApollo(
+  initialState: any,
+): ApolloClient<NormalizedCacheObject> {
   const store = useMemo(() => initializeApollo(initialState), [initialState])
   return store
 }

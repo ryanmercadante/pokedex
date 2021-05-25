@@ -1,6 +1,5 @@
-import { QueryLazyOptions } from '@apollo/client'
 import { ReactElement } from 'react'
-import { FilterOptions, GetPokemonQueryVariables, SortOption } from '../pages'
+import { FilterOptions, SortOption } from '../pages'
 import Dropdown from './Dropdown'
 
 export interface IPokemonTypeOption {

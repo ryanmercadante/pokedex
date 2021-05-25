@@ -1,4 +1,4 @@
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent, act, waitFor } from '../test-utils'
 import { IPokemon } from '../../apollo/types/pokemon'
 import Home from '../../pages/index'
 
@@ -39,13 +39,17 @@ describe('Home Page', () => {
 
     // get searchInput and change value to 'bulbasaur'
     const searchInput = getByTestId('SearchInput')
-    fireEvent.change(searchInput, { target: { value: 'bulbasaur' } })
+    act(() => {
+      fireEvent.change(searchInput, { target: { value: 'bulbasaur' } })
+    })
 
-    // When entering 'bulbasaur' into text field, all other pokemon should
-    // be filtered out, in this case just removing 'ivysaur' from page.
-    const bulbasaur = getByText('bulbasaur')
-    const ivysaur = queryByText('ivysaur')
-    expect(bulbasaur).toBeInTheDocument()
-    expect(ivysaur).toBeNull()
+    await waitFor(() => {
+      // When entering 'bulbasaur' into text field, all other pokemon should
+      // be filtered out, in this case just removing 'ivysaur' from page.
+      const bulbasaur = getByText('bulbasaur')
+      const ivysaur = queryByText('ivysaur')
+      expect(bulbasaur).toBeInTheDocument()
+      expect(ivysaur).toBeNull()
+    })
   })
 })
