@@ -8,7 +8,6 @@ import { initializeApollo } from '../apollo/client'
 import { PokeAPI } from '../apollo/datasources/pokeApi'
 import { IPokemon } from '../apollo/types/pokemon'
 import PokemonCountBadge from '../components/PokemonCountBadge'
-import Pokeball from '../components/Pokeball'
 
 export const PokemonQuery = gql`
   query Pokemon($type: String) {
@@ -136,7 +135,6 @@ export default function Home({
         filterOptions={filterOptions}
         setFilterOptions={setFilterOptions}
       />
-      <Pokeball />
       <PokemonCountBadge count={pokemon.length} />
       <PokemonCardList pokemon={pokemon} />
     </Layout>
