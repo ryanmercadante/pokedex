@@ -1,13 +1,14 @@
 import React, { ReactElement, useEffect, useState } from 'react'
 import { GetStaticProps } from 'next'
 import { gql, useLazyQuery } from '@apollo/client'
-import Layout from '../components/Layout'
-import PokemonCardList from '../components/PokemonCardList'
-import Search from '../components/Search'
 import { initializeApollo } from '../apollo/client'
 import { PokeAPI } from '../apollo/datasources/pokeApi'
 import { IPokemon } from '../apollo/types/pokemon'
+import Layout from '../components/Layout'
+import PokemonCardList from '../components/PokemonCardList'
+import Search from '../components/Search'
 import PokemonCountBadge from '../components/PokemonCountBadge'
+import Scroll from '../components/Scroll'
 
 export const PokemonQuery = gql`
   query Pokemon($type: String) {
@@ -33,11 +34,11 @@ export interface FilterOptions {
   sort: SortOption
 }
 
-interface GetPokemonQueryResult {
+export interface GetPokemonQueryResult {
   pokemon: IPokemon[]
 }
 
-interface GetPokemonQueryVariables {
+export interface GetPokemonQueryVariables {
   type?: string
 }
 
@@ -75,9 +76,16 @@ export default function Home({
   }
 
   useEffect(() => {
+    if (filterOptions.type) {
+      getPokemonByType({
+        variables: {
+          type: filterOptions.type === 'All' ? null : filterOptions.type,
+        },
+      })
+    }
     const pmon = sortAndFilter(data?.pokemon || pokemonFromProps)
     setPokemon(pmon)
-  }, [filterOptions.sort, filterOptions.text])
+  }, [filterOptions.sort, filterOptions.text, filterOptions.type])
 
   function sortPokemon(
     sortOption: SortOption,
@@ -136,7 +144,9 @@ export default function Home({
         setFilterOptions={setFilterOptions}
       />
       <PokemonCountBadge count={pokemon.length} />
-      <PokemonCardList pokemon={pokemon} />
+      <Scroll>
+        <PokemonCardList pokemon={pokemon} />
+      </Scroll>
     </Layout>
   )
 }

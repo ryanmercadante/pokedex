@@ -1,5 +1,6 @@
+import { QueryLazyOptions } from '@apollo/client'
 import { ReactElement } from 'react'
-import { FilterOptions, SortOption } from '../pages'
+import { FilterOptions, GetPokemonQueryVariables, SortOption } from '../pages'
 import Dropdown from './Dropdown'
 
 export interface IPokemonTypeOption {
@@ -104,12 +105,12 @@ export default function Search({
             />
           </div>
         </div>
-        <button
+        {/* <button
           type='submit'
           className='bg-blue-400 px-2 mx-2 rounded-lg text-white h-9 lg:mt-8 md:mt-2 mt-4 shadow-md'
         >
           Search
-        </button>
+        </button> */}
       </form>
     </div>
   )
