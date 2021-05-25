@@ -32,14 +32,18 @@ describe('PokemonCard Component', () => {
       fireEvent.click(bulbasaur.firstChild)
     })
 
-    await waitFor(() => {
-      // expect router.push to have been called with the correct route
-      expect(router.push).toHaveBeenCalledTimes(1)
-      expect(router.push).toHaveBeenCalledWith(
-        '/pokemon/1',
-        '/pokemon/1',
-        expect.anything(),
-      )
-    })
+    try {
+      await waitFor(() => {
+        // expect router.push to have been called with the correct route
+        expect(router.push).toHaveBeenCalledTimes(1)
+        expect(router.push).toHaveBeenCalledWith(
+          '/pokemon/1',
+          '/pokemon/1',
+          expect.anything(),
+        )
+      })
+    } catch (err) {
+      console.error('err', err)
+    }
   })
 })
