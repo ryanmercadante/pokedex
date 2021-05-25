@@ -105,12 +105,6 @@ export default function Search({
             />
           </div>
         </div>
-        {/* <button
-          type='submit'
-          className='bg-blue-400 px-2 mx-2 rounded-lg text-white h-9 lg:mt-8 md:mt-2 mt-4 shadow-md'
-        >
-          Search
-        </button> */}
       </form>
     </div>
   )
