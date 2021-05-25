@@ -21,7 +21,7 @@ describe('PokemonCard Component', () => {
 
   it('should redirect when clicking on card', async () => {
     // mock router push with jest
-    const router = { push: jest.fn() }
+    const router = { push: jest.fn(), prefetch: jest.fn() }
     useRouter.mockReturnValue(router)
 
     const { getByText } = render(<PokemonCard pokemon={pokemon} />)
