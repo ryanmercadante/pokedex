@@ -1,34 +1,59 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Pokedex
 
-## Getting Started
+## Table of Contents
 
-First, run the development server:
+- [General Info](#general-info)
+- [Technologies](#technologies)
+- [Setup](#setup)
+- [Features](#features)
+- [Inspiration](#inspiration)
 
-```bash
-npm run dev
-# or
-yarn dev
+## General Info
+
+Pokedex is my take on the pokedex from the Pokemon games. It is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). It is easy to use and deployed to [vercel](https://vercel.com). Access it at [https://pokedex-liart.vercel.app/](https://pokedex-liart.vercel.app/)
+
+![Pokedex Homepage](https://user-images.githubusercontent.com/44175581/119437938-1b867600-bced-11eb-94fd-7bebb966235d.png)
+
+## Technologies
+
+- [Next.js](https://nextjs.org/) - The React framework for production.
+- [Apollo Client](https://www.apollographql.com/docs/react/) - A comprehensive state management library that enables you to manage both local and remote data with GraphQL.
+- [Apollo Server Micro](https://www.apollographql.com/docs/apollo-server/) - An open-source, spec-compliant GraphQL server for building production-ready GraphQL API's.
+- [Nexus](https://nexusjs.org/) - A code-first approach to developing GraphQL servers.
+- [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework to build any design, directly in your markup.
+- [TypeScript](https://www.typescriptlang.org/) - An open-source language that builds on JavaScript by adding Types.
+- [Node.js](https://nodejs.org/en/) - A JavaScript runtime built on Chrome's V8 JavaScript engine.
+
+## Setup
+
+To run this project, install it locally using npm:
+
+```
+$ git clone https://github.com/ryanmercadante/pokedex.git
+$ cd pokedex/
+$ npm install
+$ npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Features
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Done
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+- List out every pokemon in the pokedex
+- Search for specific pokemon with text search
+- Sort pokemon list four different ways, such as A-Z or Lowest number to Highest
+- Filter pokemon by type such as fire, dark, etc.
+- Shows count of unique pokemon on the page at any given time
+- Navigate to pokemon details page to see more information about a pokemon
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## To Do:
 
-## Learn More
+- Add evolution chain to pokemon details page
+- Add more filter options
+- Add chart and animation for pokemon stats
+- Enhance pokemon details page
+- More test coverage
 
-To learn more about Next.js, take a look at the following resources:
+## Inspiration
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+The basic styling was inspired and choice of Next.js was inspired by this [video](https://www.youtube.com/watch?v=LMRAEUPkFXI). I then expanded on this idea by creating a GraphQL service layer on top of the [Pokemon REST API](https://pokeapi.co/docs/v2), adding searching, sorting, and filtering.
