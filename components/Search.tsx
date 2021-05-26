@@ -52,7 +52,7 @@ export default function Search({
   ]
 
   return (
-    <div className='lg:mx-20 mb-4 p-4 shadow-md bg-red-100 mx-10 mt-8'>
+    <div className='mb-4 p-4 shadow-md bg-red-100 lg:mx-20 md:mx-16 mx-10 mt-8'>
       <form
         onSubmit={handleFormSubmit}
         className='flex justify-center flex-col lg:flex-row'

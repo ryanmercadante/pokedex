@@ -51,7 +51,7 @@ export default function Pokemon({ pokemon }: PokemonProps): ReactElement {
     <Layout title={pokemon?.name}>
       <h1 className='text-4xl mb-2 text-center capitalize'>{pokemon?.name}</h1>
       <div className='bg-gray-700 my-8 p-2 rounded-md mx-4'>
-        <div className='flex justify-start mb-4 flex-col md:flex-row md:flex-wrap'>
+        <div className='flex justify-start flex-col md:flex-row md:flex-wrap'>
           <img
             className='max-h-full max-w-full m-1 bg-gray-200 rounded-md md:w-64 md:h-64'
             src={pokemon?.imageUrl}
@@ -97,7 +97,7 @@ export default function Pokemon({ pokemon }: PokemonProps): ReactElement {
           </div>
         </div>
       </div>
-      <p className='mt-10 text-center'>
+      <p className='mt-10 text-center pb-10'>
         <Link href='/'>
           <a className='text-2xl underline'>Home</a>
         </Link>
