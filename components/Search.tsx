@@ -52,7 +52,7 @@ export default function Search({
   ]
 
   return (
-    <div className='md:mx-20 mb-4 p-4 shadow-md bg-red-100 mx-20 mt-8'>
+    <div className='lg:mx-20 mb-4 p-4 shadow-md bg-red-100 mx-10 mt-8'>
       <form
         onSubmit={handleFormSubmit}
         className='flex justify-center flex-col lg:flex-row'
@@ -94,7 +94,7 @@ export default function Search({
             <input
               name='searchInput'
               data-testid='SearchInput'
-              className='p-2 h-9 shadow-md rounded-lg lg:w-48 md:w-36 min-w-full'
+              className='p-2 h-9 shadow-md rounded-lg lg:w-48 w-full min-w-full'
               type='text'
               value={filterOptions.text}
               onChange={(e) =>
