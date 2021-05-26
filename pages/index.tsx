@@ -68,7 +68,7 @@ export default function Home({
 
     if (filterOptions.text) {
       _pokemon = _pokemon.filter((poke) =>
-        poke.name.includes(filterOptions.text),
+        poke.name.includes(filterOptions.text.toLowerCase()),
       )
     }
 
