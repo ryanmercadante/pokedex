@@ -64,5 +64,5 @@ The basic styling was inspired and choice of Next.js was inspired by this [video
 
 - [LinkedIn](https://www.linkedin.com/in/ryan-mercadante-11a035152/)
 - [Github](https://www.github.com/ryanmercadante)
-- [Twitter](https://twitter.com/RyanMercadante)
+- [Twitter](https://twitter.com/polkamerc)
 - [Email](mailto:ryan.a.mercadante@gmail.com)
